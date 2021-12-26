@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" >
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+
+        function getCookie(name){
+            //split cookie string and get all individaul name=value pairs in an array
+            var cookieArr = document.cookie.split(";");
+
+            //loop through the array elements
+            for(var i =0; i<cookieArr.length; i++){
+                var cookiePair = cookieArr[i].split("=");
+
+                //Removing whitespace at the beginning of the cookiet name and compare it with the given string
+                if(name == cookiePair[0].trim()){
+                    //decode the cookies value and return 
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            //return null if not found
+            return null;
+        }
+        
+        var cart = JSON.parse(getCookie('cart'))
+        if(cart==undefined){
+            cart ={}
+            console.log('Cart was created')
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=; path=/"
+        }
+        
+        console.log('Cart:', cart)
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: #d9d9d9;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            text-align: right;
+        }
+
+        .topnav li {
+            list-style: none;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .topnav li a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 16px;
+            font-family: Helvetica;
+            text-decoration: none;
+        }
+
+        .topnav .search-container {
+            float: right;
+        }
+
+        .topnav input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            color: black;
+        }
+
+        .topnav .search-container button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background: #ccc;
+        }
+
+        @media screen and (max-width: 600px) {
+            .topnav .search-container {
+                float: none;
+            }
+
+            .topnav a,
+            .topnav input[type=text],
+            .topnav .search-container button {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+                color: black;
+            }
+
+            .topnav input[type=text] {
+                border: 1px solid rgb(0, 0, 0);
+            }
+        }
+
+        .logo {
+            width: 65px;
+            cursor: pointer;
+            border-radius: 100%;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="products">
+
+        <div class="topnav">
+            <li><a class="active" href="{% url 'home' %}">HOME</a></li>
+            <li><a href="{% url 'products' %}">Sản Phẩm</a></li>
+            <li><a href="{% url 'order' %}">Đặt Hàng</a></li>
+            <li><a href="{% url 'cart' %}">Giỏ Hàng</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}"> Đăng Xuất </a></li>
+            {% else %}
+            <li><a href="{% url 'register' %}"> Đăng Ký </a></li>
+            <li><a href="{% url 'login' %}"> Đăng Nhập</a></li>
+            {% endif %}
+            <div class="search-container">
+                <form class="search-form" action="/search" method="GET">
+                    {% csrf_token %}
+
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit" class="btn-button-search" style="color: black;">search</button>
+                </form>
+            </div>
+        </div>
+        <img src="{%static 'images/l.PNG' %}" alt="" class="logo">
+        <div class="container">
+            <h1 class="lg-title">CÁC LOẠI XÀ PHÒNG HANDMADE</h1>
+            <!-- <p class = "text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quos sit consectetur, ipsa voluptatem vitae necessitatibus dicta veniam, optio, possimus assumenda laudantium. Temporibus, quis cum.</p> -->
+            <div class="product-items">
+                <!-- single product -->
+                {% for product in productss %}
+                <div class="product">
+                    <div class="product-content">
+                        <div class="product-img">
+                            <a href="{% url 'detail'  product.id%}"><img src="{{product.image.url}}" alt="product image"
+                                    class="img-sp"></a>
+                        </div>
+                        <div class="product-btns">
+                            <button type="button" class="btn-cart update-cart" data-product={{product.id}} data-action="add"> add to cart
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                            <a href="{%url 'detail' product.id%}"><button type="button" class="btn-buy" >View
+                                <span><i class="fas fa-eye"></i></span>
+                            </button></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <h2 class="sm-title">NUT</h2>
+                            <div class="rating">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="far fa-star"></i></span>
+                            </div>
+                        </div>
+                        <a href="#" class="product-name">{{product.productname}}</a>
+                        <p class="product-price new-product-price">{{product.newprice}} vnd</p>
+                        <p class="product-price old-product-price">{{product.oldprice}} vnd</p>
+                    </div>
+                </div>
+                {%endfor%}
+                <!-- end of single product -->
+            </div>
+        </div>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{%static 'cart.js'%}"></script>
+
+    </div>
+</body>
+
+</html>

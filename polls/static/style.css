@@ -1,0 +1,228 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: #d9d9d9;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(images/background.jpg);
+    background-position: center;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;
+}
+
+.navbar{
+    height: 12%;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    width: 60px;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+nav{
+    flex: 1;
+    text-align: right;
+    
+}
+
+.avatar-user{
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+    border-radius: 50%;
+}
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 40px;    
+    margin-top: 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-family: Helvetica;
+}
+nav a span i{
+    color:#fff;
+    font-size: 20px;
+}
+.row{
+    display: flex;
+    height: 80%;
+    align-items: center;
+
+}
+
+.col{
+    flex-basis: 50%;
+    
+}
+
+h1{
+    color: #fff;
+    font-size: 60px;
+    font-family: Arial;
+}
+
+b{
+    color:black;
+   
+}
+.row .col p{
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    line-height: 15px;
+}
+
+
+.btn-button {
+    width: 150px;
+    font-size: 16px;
+    font-weight: 600px;
+    font-family: Helvetica;
+    color: #fff;
+    cursor: pointer;
+    height: 40px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.btn-button:hover {
+    background-position: 100% 0;
+    transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.btn-button:focus {
+    outline: none;
+}
+
+.btn-button {
+    background-image: -webkit-linear-gradient(right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+.card{
+    width: 200px;
+    height: 230px;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 15px  25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.5;
+}
+
+.card1{
+    background-image: url(images/hoadaubiet.jpeg);
+}
+.card2{
+    background-image: url(images/tr.jpg);
+}
+.card3{
+    background-image: url(images/c.jpeg);
+}
+.card4{
+    background-image: url(images/oaihuong.jpeg);
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+/* footer */
+footer{
+    margin-top: 0px;
+    bottom: 0px;
+    width: 100%;
+    background: #111;
+}
+.main-content{
+    display: flex;
+}
+
+.main-content .box{
+    flex-basis: 50%;
+    padding: 0px 20px;
+}
+
+.box h2{
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.box .content{
+    margin: 5px 0 0 0;
+}
+
+.box .content  span{
+    font-size: 12px;
+}
+.left .content p{
+    text-align: justify;
+    font-size: 12px;
+}
+.social li{
+    list-style-type: none;
+    display: inline;
+}
+.social li a{
+    text-decoration: none;
+}
+.facebook{
+    height: 25px;
+    width: 25px;
+    /* margin-top: 20px; */
+    border-radius: 100%;
+    cursor: pointer;
+}
+.youtube{
+    height: 25px;
+    width: 25px;
+    /* margin-top: 20px; */
+    margin-left: 10px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.instagram{
+    height: 25px;
+    width: 25px;
+    /* margin-top: 20px; */
+    margin-left: 10px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.tiktok{
+    height: 25px;
+    width: 25px;
+    /* margin-top: 20px; */
+    margin-left: 10px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+/* product */

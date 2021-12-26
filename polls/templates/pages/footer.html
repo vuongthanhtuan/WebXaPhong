@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"> -->
+    <title>{%block title %}{%endblock%}</title>
+   
+</head>
+<body>
+   
+    <!-- footer -->
+    <footer>
+        <div class="main-content">
+            <div class="left box">
+                <h2>About us</h2>
+                <div class="content">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Quo asperiores eligendi mollitia quae ipsa, tempore repudiandae rem laborum obcaecati nostrum aperiam labore alias ex, odio nam. 
+                        Dicta nesciunt dolores fuga.
+                    </p>
+                    <div class="social"> 
+                        <li><a href="https://www.facebook.com/C%C3%B4ng-Ngh%E1%BB%87-Truy%E1%BB%81n-Th%C3%B4ng-%C4%90PT-105349785258553"><img src="{%static 'images/facebook.png' %}" alt="" class="facebook"></a></li>
+                        <li><a href="https://www.youtube.com/"><img src="{%static 'images/youtube.png' %}" alt="" class="youtube"></a></li>
+                        <li><a href=""><img src="{%static 'images/instagram.jpeg' %}" alt="" class="instagram"></a></li>
+                        <li><a href="https://www.tiktok.com/vi-VN/"><img src="{%static 'images/tiktok1.png' %}" alt="" class="tiktok"></a></li>
+                    </div>
+                </div>
+            </div>
+           <div class="center box">
+               <h2>Địa Chỉ</h2>
+               <div class="content">
+                   <div class="place">
+                       <span class="fas fa-map-marker-alt"></span>
+                       <span class="text">CTY: Xà Phòng NUT</span>
+                   </div>
+                   <div class="phone">
+                        <span class="fas fa-phone-alt"></span>
+                        <span class="text">Sdt: +84937906855</span>
+                    </div>
+                    <div class="email">
+                        <span class="fas fa-envelope"></span>
+                        <span class="text">Email: vuongthanhtuan212@gmail.com</span>
+                    </div>
+               </div>
+           </div>
+           <div class="right box">
+               <h2>Contact us</h2>
+               <div class="content">
+                   <form action="#">
+                        <div class="email">
+                            <div class="text" style="font-size: 12px;">Email *</div>
+                            <input type="text" required>
+                        </div>
+                        <div class="msg">
+                            <div class="text" style="font-size:12px;">Message *</div>
+                            <textarea cols="25" rows="2" required></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit" class="btn-button"> Send </button>
+                        </div>
+                   </form>
+               </div>
+           </div>
+        </div>
+    </footer>
+</body>
+</html>

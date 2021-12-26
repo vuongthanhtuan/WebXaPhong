@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+    <title>{%block title %}{%endblock%}</title>
+   
+</head>
+<body>
+    <div class="container"> 
+        <div class="nav">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li><a href="{% url 'products' %}">Sản Phẩm</a></li>
+                    <li><a href="{% url 'order' %}">Đặt Hàng</a></li>
+                    <li><a href="{% url 'cart' %}">Giỏ Hàng</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}" > Đăng Xuất </a></li> 
+                        <a href="{%url 'profile'%}"><img class="avatar-user" src="{{request.user.customer.image.url}}" alt=""></a>
+                    {% else %}
+                        <li><a href="{% url 'register' %}"> Đăng Ký </a></li>
+                        <li><a href="{% url 'login' %}"> Đăng Nhập</a></li>
+                    {% endif %}
+
+                </ul> 
+            </nav>
+        </div>
+        <img src="{%static 'images/l.PNG' %}" alt="" class="logo">
+        {%block content %} 
+
+        {%endblock%}
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="main-content">
+            <div class="left box">
+                <h2>Fanpage</h2>
+                <div class="content">
+                    <p>
+                        Ngoài ra các bạn có thể tìm kiếm sản phẩm của chúng tôi trên các trang mạng xã hội khác như: facebook, youtube,....  
+                    </p>
+                    <div class="social"> 
+                        <li><a href="https://www.facebook.com/C%C3%B4ng-Ngh%E1%BB%87-Truy%E1%BB%81n-Th%C3%B4ng-%C4%90PT-105349785258553"><img src="{%static 'images/facebook.png' %}" alt="" class="facebook"></a></li>
+                        <li><a href="https://www.youtube.com/"><img src="{%static 'images/youtube.png' %}" alt="" class="youtube"></a></li>
+                        <li><a href=""><img src="{%static 'images/instagram.jpeg' %}" alt="" class="instagram"></a></li>
+                        <li><a href="https://www.tiktok.com/vi-VN/"><img src="{%static 'images/tiktok1.png' %}" alt="" class="tiktok"></a></li>
+                    </div>
+                </div>
+            </div>
+           <div class="center box">
+               <h2>Địa Chỉ</h2>
+               <div class="content">
+                   <div class="place">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                       <!-- <span class="fas fa-map-marker-alt"></span> -->
+                       <span class="text">CTY: Xà Phòng NUT, khu phố 6, phường Linh Trung, quận Thủ Đức, Thành phố Hồ Chí Minh</span>
+                   </div>
+                   
+               </div>
+           </div>
+           <div class="right box">
+               <h2>Liên Hệ</h2>
+               <div class="content">
+                   <div class="phone">
+                        <span class="glyphicon glyphicon-earphone"></span>
+                        <span class="text">Sdt: +84937906855</span>
+                    </div>
+                    <div class="email">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        <span class="text">Email: vuongthanhtuan212@gmail.com</span>
+                    </div>
+                   <!-- <form action="#">
+                        <div class="email">
+                            <div class="text" style="font-size: 12px;">Email *</div>
+                            <input type="text" required>
+                        </div>
+                        <div class="msg">
+                            <div class="text" style="font-size:12px;">Message *</div>
+                            <textarea cols="25" rows="2" required></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit" class="btn-button"> Send </button>
+                        </div>
+                   </form> -->
+               </div>
+           </div>
+        </div>
+    </footer>
+</body>
+</html>

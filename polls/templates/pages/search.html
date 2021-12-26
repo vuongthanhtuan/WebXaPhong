@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'search.css' %}">
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+    <title>Search</title>
+    <script type="text/javascript" >
+        var user = '{{request.user}}'
+    
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+    
+        function getCookie(name){
+            //split cookie string and get all individaul name=value pairs in an array
+            var cookieArr = document.cookie.split(";");
+    
+            //loop through the array elements
+            for(var i =0; i<cookieArr.length; i++){
+                var cookiePair = cookieArr[i].split("=");
+    
+                //Removing whitespace at the beginning of the cookiet name and compare it with the given string
+                if(name == cookiePair[0].trim()){
+                    //decode the cookies value and return 
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            //return null if not found
+            return null;
+        }
+        
+        var cart = JSON.parse(getCookie('cart'))
+        if(cart==undefined){
+            cart ={}
+            console.log('Cart was created')
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=; path=/"
+        }
+        
+        console.log('Cart:', cart)
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: #d9d9d9;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="products">
+        <div class="button-back">
+            <a href="{% url 'products' %}"><button class="btn-button-back">Back</button></a>
+        </div>
+        <div class="container">
+            <div class="product-items">
+                {%for product in products %}
+                <div class="product">
+                    <div class="product-content">
+                        <div class="product-img">
+                            <li style="list-style-type: none;">
+                                <img src="{{product.image.url}}" alt="product image" class="img-sp">
+                            </li>
+                        </div>
+                        <div class="product-btns">
+                            <button type="button" class="btn-cart update-cart" data-product={{product.id}} data-action="add"> add to cart
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                            <a href="{%url 'detail' product.id%}"><button type="button" class="btn-buy" >View
+                                <span><i class="fas fa-eye"></i></span>
+                            </button></a>
+                        </div>
+                    </div>
+                
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <h2 class="sm-title">NUT</h2>
+                            <div class="rating">
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="fas fa-star"></i></span>
+                                <span><i class="far fa-star"></i></span>
+                            </div>
+                        </div>
+                        <a href="#" class="product-name">{{product.productname}}</a>
+                        <p class="product-price new-product-price">{{product.newprice}} vnd</p>
+                        <p class="product-price old-product-price">{{product.oldprice}} vnd</p>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <script src="{%static 'cart.js'%}"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'cart.css' %}" type="text/css">
+    <title>{%block title %}{%endblock%}</title>
+    <script type="text/javascript" >
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+
+        function getCookie(name){
+            //split cookie string and get all individaul name=value pairs in an array
+            var cookieArr = document.cookie.split(";");
+
+            //loop through the array elements
+            for(var i =0; i<cookieArr.length; i++){
+                var cookiePair = cookieArr[i].split("=");
+
+                //Removing whitespace at the beginning of the cookiet name and compare it with the given string
+                if(name == cookiePair[0].trim()){
+                    //decode the cookies value and return 
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            //return null if not found
+            return null;
+        }
+        
+        var cart = JSON.parse(getCookie('cart'))
+        if(cart==undefined){
+            cart ={}
+            console.log('Cart was created')
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=; path=/"
+        }
+        
+        console.log('Cart:', cart)
+    </script>
+    <style>
+        /* arrow-up and arrow-down */
+        .quantity {
+            display: inline-block;
+            font-weight: 700;
+            color: rgb(155, 156, 160);
+            font-size: 18px;
+        }
+
+        .chg-quantity {
+            width: 12px;
+            cursor: pointer;
+            display: block;
+            transition: 1s;
+        }
+
+        .chg-quantity:hover {
+            opacity: 0.6;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="products">
+        <div class="button-back">
+            <a href="{% url 'products' %}"><button class="btn-button-back">Back</button></a>
+        </div>
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <div class="cart">
+                {%for item in items %}
+                <div class="products">
+                    <div class="product">
+                        <img class="img" src="{{item.product.image.url}}">
+                        <div class="product-info">
+                            <h3 class="product-name">{{item.product.productname}}</h3>
+                            <h4 class="product-price">{{item.product.newprice}} vnd</h4>
+                            <p class="quantity">Quantity: {{item.quantity}}</p>
+                            <div class="quantity">
+                                <img data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart"
+                                    src="{%static 'images/arrow-up.png'%}" alt="">
+                                <img data-product={{item.product.id}} data-action="remove"
+                                    class="chg-quantity update-cart" src="{%static 'images/arrow-down.jpeg'%}" alt="">
+                            </div>
+                            <p class="product-total">Total: {{item.get_total}} vnd</p>
+                        </div>
+                        <!-- <div class="button-remove">
+                            <button data-product={{item.product.id}} data-action="buttonremove" class="btn-button-remove" >Remove</button>
+                        </div> -->
+
+                    </div>
+                </div>
+                {%endfor%}
+                <div class="cart-total">
+                    <p>
+                        <span>Number of Items: {{order.get_cart_items}}</span>
+                    </p>
+                    <p>
+                        <span>Total: {{order.get_cart_total}} vnd</span>
+                    </p>
+                    <div class="button-buy">
+                        <a href="{% url 'order' %}"><button class="btn-button-buy">Buy Now</button> </a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="button-buy">
+                <button class="btn-button-buy" onclick="buyItem()">Buy Now</button>
+            </div>  -->
+        </div>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{%static 'cart.js'%}"></script>
+        
+    </div>
+</body>
+
+</html>

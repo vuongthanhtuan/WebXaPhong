@@ -1,0 +1,43 @@
+{%extends "pages/base.html"%}
+{% load static %}
+
+{%block title %} Home {%endblock%}
+
+
+{%block content %}
+<div class="row">
+    <div class="col">
+        <h1>Xà Phòng NUT Handmade</h1>
+        <p>
+            Với tinh thần sáng tạo, luôn đổi mới, chú trọng vào từng khâu sản xuất, nghiên cứu.
+            Với hy vọng đem lại sản phẩm tốt nhất cho người tiêu dùng.
+            Xà phòng NUT Handmade là một sản chất lượng-an toàn-tốt cho sức khỏe người tiêu dùng.
+        </p>
+        <div class="button">
+            <a href="{% url 'order' %}"><button class="btn-button">ĐẶT HÀNG</button></a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card card1">
+            <b>Hoa Đậu Biết</b>
+            <p>
+            </p>
+        </div>
+        <div class="card card2">
+            <b>Trà Xanh</b>
+            <p>
+            </p>
+        </div>
+        <div class="card card3">
+            <b>Caffe</b>
+            <p>
+            </p>
+        </div>
+        <div class="card card4">
+            <b>Oải Hương</b>
+            <p>
+            </p>
+        </div>
+    </div>
+</div>
+{%endblock%}
